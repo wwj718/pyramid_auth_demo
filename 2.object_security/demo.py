@@ -307,7 +307,8 @@ def edit_page_view(request):
 def main(global_settings, **settings):
     authn_policy = AuthTktAuthenticationPolicy(
         settings['auth.secret'],
-        callback=groupfinder,
+        #  callback passed the userid and the request, expected to return None if the userid doesn't exist or a sequence of principal identifiers
+        callback=groupfinder, #http://docs.pylonsproject.org/projects/pyramid/en/latest/api/authentication.html
     )
     authz_policy = ACLAuthorizationPolicy()
 
